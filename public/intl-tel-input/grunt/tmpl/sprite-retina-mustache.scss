@@ -1,0 +1,42 @@
+@function strip-units($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@function retina-size($value) {
+  @return strip-units($value)/2 + px;
+}
+
+@mixin retina-bg-size($spriteWidth, $spriteHeight) {
+  background-size: (strip-units($spriteWidth)/2) + px (strip-units($spriteHeight)/2) + px;
+}
+
+.iti-flag {
+  $item-width-maps: ({{#items}}{{strings.name}}: {{px.width}}, {{/items}});
+  $standard-country: 'ac';
+  width: retina-size(map-get($item-width-maps, $standard-country));
+
+  @each $key, $width in $item-width-maps {
+    @if $width != map-get($item-width-maps, $standard-country) {
+      &.#{$key} {
+        width: retina-size($width);
+      }
+    }
+  }
+
+  @media
+  only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (   min--moz-device-pixel-ratio: 2),
+  only screen and (     -o-min-device-pixel-ratio: 2/1),
+  only screen and (        min-device-pixel-ratio: 2),
+  only screen and (                min-resolution: 192dpi),
+  only screen and (                min-resolution: 2dppx) {
+    @include retina-bg-size({{spritesheet.px.width}}, {{spritesheet.px.height}});
+  }
+
+  {{#items}}
+  &.{{strings.name}} {
+    height: retina-size({{px.height}});
+    background-position: retina-size({{px.offset_x}}) retina-size({{px.offset_y}});
+  }
+  {{/items}}
+}

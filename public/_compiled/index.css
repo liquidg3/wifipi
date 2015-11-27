@@ -1,0 +1,67 @@
+@font-face {
+  font-family: 'hellogoodbye';
+  src: url('../fonts/hellogoodbye.eot');
+  src: local('â˜º'), url('../fonts/hellogoodbye.woff') format('woff'), url('../fonts/hellogoodbye.ttf') format('truetype'), url('../fonts/hellogoodbye.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'splendid';
+  src: url('../fonts/SplendidB.eot');
+  src: local('☺'), url('../fonts/SplendidB.woff') format('woff'), url('../fonts/SplendidB.ttf') format('truetype'), url('../fonts/SplendidB.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+h1 {
+  font-size: 350%;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'hellogoodbye';
+}
+body {
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  font-family: 'splendid';
+}
+.ng-hide {
+  display: none;
+}
+input,
+textarea {
+  color: #000;
+}
+p {
+  font-size: 200%;
+}
+input[type="text"],
+input[type="tel"],
+input[type="email"] {
+  font-size: 180%;
+}
+.button {
+  background-color: #fff;
+  display: block;
+  padding: 10px 0;
+  text-align: center;
+  font-family: 'hellogoodbye';
+  color: #000;
+  font-size: 300%;
+  width: 100%;
+  border: none;
+  margin-top: 30px;
+}
+.button.submit:hover,
+.button.submit:active {
+  background-color: #000;
+  color: #fff;
+}
+.footer-logo {
+  max-width: 90%;
+  margin: 50px auto;
+  display: block;
+}

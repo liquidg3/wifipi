@@ -1,23 +1,35 @@
 <?php
 
-    $mac = shell_exec("/usr/sbin/arp -a ".$_SERVER['REMOTE_ADDR']);
-    $error = false;
+    $cmd        = "/usr/sbin/arp ".$_SERVER['REMOTE_ADDR'];
+    $mac        = shell_exec($cmd);
+    $error      = false;
+    $done       = false;
+    $name       = false;
+    $existing   = false;
 
-    if ($_POST['phone']) {
+    if (!$mac) {
+        echo 'Could not detect your devices address. Please try again later.';
+        return;
+    }
 
-        $domain         = 'https://appointments.spruce.me';
-//        $domain         = 'https://10.1.10.34';
+    if (isset($_POST['phone']) && $_POST['phone']) {
+
+//        $domain         = 'https://appointments.spruce.me';
+        $domain         = 'https://taysmacbookpro.local:8080';
         $matches        = [];
-        preg_match('/..:..:..:..:..:../',$mac , $matches);
+
+        preg_match('/..:..:..:..:..:../', $mac , $matches);
 
         $url            = $domain . '/captive/signup?phone=' . urlencode($_POST['phone']) . '&mac=' . urlencode($matches[0]);
+        $results        = @file_get_contents($url);
+        $results        = @json_decode($results);
 
-        $results = file_get_contents($url);
-
-        if ($results) {
+        if ($results && $results->success) {
 
             //they are good, add them to the white list
-            
+            $done       = true;
+            $name       = isset($results->client) ? $results->client->first_name : 'friend';
+            $existing   = isset($results->client);
 
         } else {
 
@@ -54,7 +66,7 @@
 
 <div class="container-fluid" ng-show="!done">
 
-    <div ng-show="!done">
+    <?php if (!$done) { ?>
 
         <h1>Get Spruce Wifi</h1>
 
@@ -63,21 +75,29 @@
         </p>
 
         <form method="post">
+
             <div class="form-group">
                 <input name="phone" type="tel" phonenumber ng-model="phoneNumberQuery" placeholder="720-555-5555"/>
             </div>
+
             <div class="submit">
                 <button class="button" type="submit">Let Me On</button>
             </div>
 
         </form>
 
-        <p>*This is designed to make sure people don't abuse the Wifi. We don't track what you are doing on the Internet, that would be creepy. But, please don't to anything that will get is in trouble.</p>
-    </div>
+        <p>*This is designed to make sure people don't abuse the Wifi. We don't track what you are doing on the Internet, that would be creepy. But, please don't do anything that will get us in trouble.</p>
 
-    <div ng-show="done">
+    <?php } else { ?>
 
-    </div>
+        <h1>Welcome <?php if ($existing) { ?>back<?php } ?> <?php echo $name; ?></h1>
+
+        <p>
+            You should be getting a text soon, hold tight!
+        </p>
+
+
+    <?php } ?>
 
 </div>
 

@@ -1,5 +1,7 @@
 var exec            = require('child_process').exec,
     _               = require('lodash'),
+    socket          = require('socket.io-client')('https://appointments.spruce.me'),
+    //socket          = require('socket.io-client')('https://taysmacbookpro.local:8080'),
     reg             = /..:..:..:..:..:../i,
     connectedUsers  = {};
 
@@ -7,6 +9,10 @@ var exec            = require('child_process').exec,
  * Check all connected devices
  */
 var check = function () {
+
+    if (!socket.connected) {
+        return;
+    }
 
     exec('arp -a', function (err, stdout, stderr) {
 
@@ -59,14 +65,13 @@ var check = function () {
 
 var userConnected = function (mac) {
     console.log('user connected', mac);
+    socket.emit('captive-checkin', mac);
 };
 
 var userDisconnected = function (mac) {
     console.log('user disconnected', mac);
+    socket.emit('captive-checkout', mac);
 };
 
 
-
-
-check();
 setInterval(check, 2000);

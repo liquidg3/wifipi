@@ -14,8 +14,8 @@
 
     if (isset($_POST['phone']) && $_POST['phone']) {
 
-//        $domain         = 'https://appointments.spruce.me';
-        $domain         = 'https://taysmacbookpro.local:8080';
+        $domain         = 'https://appointments.spruce.me';
+//        $domain         = 'https://taysmacbookpro.local:8080';
         $matches        = [];
 
         preg_match('/..:..:..:..:..:../', $mac , $matches);

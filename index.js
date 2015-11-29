@@ -19,7 +19,6 @@ var check = function () {
         if (stdout) {
 
             var peeps       = stdout.split('\n'),
-                lost        = [],
                 connected   = [];
 
             //loop through each connected user and get their mac address

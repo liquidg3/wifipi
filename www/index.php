@@ -30,6 +30,9 @@
             $done       = true;
             $name       = isset($results->client) ? $results->client->first_name : 'friend';
             $existing   = isset($results->client);
+// let them have internet, putting this here for now
+    exec("sudo iptables -I internet 1 -t mangle -m mac --mac-source $mac -j RETURN");
+    exec("sudo rmtrack ".$_SERVER['REMOTE_ADDR']);
 
         } else {
 

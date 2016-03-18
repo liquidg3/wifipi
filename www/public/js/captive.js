@@ -10,8 +10,8 @@
 
     var app = angular.module('captive', []),
         mac = $('#mac').html(),
-        url = 'https://taysmacbook.ngrok.io',
-    //url = 'https://appointments.spruce.me',
+    // url = 'https://taysmacbook.ngrok.io',
+        url = 'https://appointments.spruce.me',
         socket = io(url);
 
     app.controller('MainController', ['$scope', 'com', function ($scope, com) {
@@ -74,7 +74,7 @@
                 alert("I'm not able to connect to the Spruce service. Try again later.");
                 return;
             }
-            
+
             socket.emit('captive-signup', $scope.phoneNumberQuery, $scope.email, mac, function (err, client) {
 
                 if (err) {
@@ -87,7 +87,7 @@
                 $scope.whitelist();
 
             });
-            
+
         };
 
         com(function () {

@@ -10,8 +10,8 @@
 
     var app = angular.module('captive', []),
         mac = $('#mac').html(),
-        url = 'https://taysmacbook.ngrok.io',
-        // url = 'https://appointments.spruce.me',
+        // url = 'https://taysmacbook.ngrok.io',
+        url = 'https://appointments.spruce.me',
         socket = io(url);
 
     app.controller('MainController', ['$scope', 'com', function ($scope, com) {

@@ -71,8 +71,10 @@ $mac = $matches[0];
         <h1>Welcome Back {{ client.first_name }}</h1>
 
         <p>
-            You now have Internet!
+            You now have Internet! Keep an eye out for your text to play our "Scratch and Win" game!
         </p>
+
+        <a class="button" href="https://spruce.me">Sounds Good</a>
     </div>
 
     <form ng-submit="signup();" ng-show="done && !client && !newClient">
@@ -90,6 +92,7 @@ $mac = $matches[0];
     <div ng-show="done && newClient">
         <h1>All Set!</h1>
         <p>You should now have internet and should also get a link for your first reward.</p>
+        <a class="button" href="https://spruce.me">Sounds Good</a>
     </div>
 
 

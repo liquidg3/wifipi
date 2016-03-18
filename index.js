@@ -1,7 +1,7 @@
 var exec            = require('child_process').exec,
     _               = require('lodash'),
-    // socket          = require('socket.io-client')('https://appointments.spruce.me'),
-    socket          = require('socket.io-client')('https://taysmacbook.ngrok.io'),
+    socket          = require('socket.io-client')('https://appointments.spruce.me'),
+    // socket          = require('socket.io-client')('https://taysmacbook.ngrok.io'),
     reg             = /..:..:..:..:..:../i,
     connectedUsers  = {};
 

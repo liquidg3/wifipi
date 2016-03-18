@@ -7,8 +7,6 @@ $done = false;
 $name = false;
 $existing = false;
 
-$mac = 'a:a:a:a:a:a';
-
 if (!$mac) {
     echo 'Could not detect your devices address. Please try again later.';
     return;

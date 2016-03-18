@@ -69,6 +69,11 @@
         $scope.signup = function () {
 
             $scope.submitting = true;
+
+            if (!socket.connected) {
+                alert("I'm not able to connect to the Spruce service. Try again later.");
+                return;
+            }
             
             socket.emit('captive-signup', $scope.phoneNumberQuery, $scope.email, mac, function (err, client) {
 

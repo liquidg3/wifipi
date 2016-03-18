@@ -12,6 +12,10 @@ if (!$mac) {
     return;
 }
 
+$matches = [];
+preg_match('/..:..:..:..:..:../', $mac , $matches);
+$mac = $matches[0];
+
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>

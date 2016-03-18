@@ -13,8 +13,9 @@ if (!$mac) {
 }
 
 $matches = [];
+preg_match('/..:..:..:..:..:../', $mac , $matches);
+$mac = $matches[0];
 
-preg_match('/..:..:..:..:..:../', $mac, $matches);
 exec("sudo iptables -I internet 1 -t mangle -m mac --mac-source $mac -j RETURN");
 exec("sudo rmtrack " . $_SERVER['REMOTE_ADDR']);
 
